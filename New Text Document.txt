@@ -1,0 +1,14 @@
+npm i @ant-design/icon
+npm i antd
+npm i firebase
+npm i react-toastify
+
+C:\Program Files\MongoDB\Server\4.4\bin
+
+
+
+on client:
+
+npm i @stripe/stripe-js @stripe/react-stripe-js
+npm i @react-pdf/renderer
+mpm i @david.kucsai/react-pdf-table

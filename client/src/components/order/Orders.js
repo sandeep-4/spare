@@ -5,7 +5,7 @@ import ShowPaymentInfo from "../cards/ShowPaymentInfo";
 const Orders = ({ orders, handleStatusChange }) => {
   const showOrderInTable = (order) => (
     <table className="table table-bordered">
-      <thead className="thead-light">
+      <thead className="thead-dark">
         <tr>
           <th scope="col">Title</th>
           <th scope="col">Price</th>
@@ -58,8 +58,8 @@ const Orders = ({ orders, handleStatusChange }) => {
                   name="status"
                 >
                   <option value="Not Processed">Not Processed</option>
-                  <option value="Processing">Processing</option>
                   <option value="Cash On Delivery">Cash On Delivery</option>
+                  <option value="Processing">Processing</option>
                   <option value="Dispatched">Dispatched</option>
                   <option value="Cancelled">Cancelled</option>
                   <option value="Completed">Completed</option>

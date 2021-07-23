@@ -1,20 +1,20 @@
 const mongoose=require('mongoose');
-const {ObjectId}=mongoose.Schema;
+const {ObjectId}=mongoose.Schema
 
 const categorySchema=new mongoose.Schema({
     name:{
         type:String,
         trim:true,
-        required:[true,'name is required'],
-        minlength:[3,'too short'],
-        maxlength:[32,'max length']
+        required:'Name is required',
+        minlength:[3,'Min length is 3'],
+        maxlength:[32,'Too long'],
     },
     slug:{
         type:String,
         unique:true,
-        lowercse:true,
+        lowecase:true,
         index:true
     }
-},{timestamps:true})
+},{timestamps:true});
 
 module.exports=mongoose.model('Category',categorySchema);

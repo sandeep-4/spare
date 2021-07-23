@@ -4,15 +4,15 @@ import { getOrders, changeStatus } from "../../functions/admin";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Orders from "../../components/order/Orders";
+
 const AdminDashboard = () => {
 
   const [orders,setOrders]=useState([]);
-
   const {user}=useSelector((state)=>({...state}));
 
-  useEffect(()=>{
+  useEffect(() => {
     loadOrders();
-  },[]);
+  }, [])
 
   const loadOrders=()=>{
     getOrders(user.token).then((res)=>{
@@ -21,12 +21,11 @@ const AdminDashboard = () => {
   }
 
   const handleStatusChange=(orderId,orderStatus)=>{
-    changeStatus(orderId,orderStatus,user.token)
-    .then((res)=>{
-      toast.success(`Sucessfully status updated`);
+    changeStatus(orderId,orderStatus,user.token).then((res)=>{
+      toast.success("updated sucessfully");
+      loadOrders();
     })
   }
-
 
   return (
     <div className="container-fluid">
@@ -42,7 +41,6 @@ const AdminDashboard = () => {
         </div>
       </div>
     </div>
-  
   );
 };
 

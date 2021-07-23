@@ -5,21 +5,17 @@ const subSchema=new mongoose.Schema({
     name:{
         type:String,
         trim:true,
-        required:[true,'name is required'],
-        minlength:[3,'too short'],
-        maxlength:[32,'max length']
+        required:'Name is required',
+        minlemgth:['2','Too short'],
+        maxlemgth:['32','Too long']
     },
     slug:{
         type:String,
+        index:true,
         unique:true,
-        lowercse:true,
-        index:true
+        lowercase:true
     },
-    parent:{
-        type:ObjectId,
-        ref:'Category',
-        required:true
-    },
+    parent:{type:ObjectId,ref:'Category',required:true}
 },{timestamps:true})
 
 module.exports=mongoose.model('Sub',subSchema);

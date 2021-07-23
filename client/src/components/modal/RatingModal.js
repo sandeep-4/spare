@@ -3,12 +3,13 @@ import { Modal, Button } from "antd";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { StarOutlined } from "@ant-design/icons";
-import { useHistory,useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const RatingModal=({children})=>{
 
     const {user}=useSelector((state)=>({...state}));
     const [modalVisible,setModalVisible]=useState(false);
+
     let history=useHistory();
     let {slug}=useParams();
 
@@ -17,8 +18,8 @@ const RatingModal=({children})=>{
             setModalVisible(true);
         }else{
             history.push({
-                pathname:'/login',
-                state:{from:`/product/${slug}`}
+                pathname:"/login",
+                state: { from: `/product/${slug}` },
             })
         }
     }
@@ -43,5 +44,7 @@ const RatingModal=({children})=>{
           </Modal>
         </>
       );
-}
-export default RatingModal;
+    };
+    
+    export default RatingModal;
+    

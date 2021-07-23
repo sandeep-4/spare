@@ -2,12 +2,11 @@ import React from "react";
 import { Drawer, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import laptop from "../../images/laptop.png";
+import spare from "../../images/spare.jpg";
 
 const SideDrawer = () => {
   const dispatch = useDispatch();
-  const { drawer, cart } = useSelector((state) => ({ ...state }));
-
+  const { cart, drawer } = useSelector((state) => ({ ...state }));
   const imageStyle = {
     width: "100%",
     height: "50px",
@@ -40,7 +39,7 @@ const SideDrawer = () => {
               </>
             ) : (
               <>
-                <img src={laptop} style={imageStyle} />
+                <img src={spare} style={imageStyle} />
                 <p className="text-center bg-secondary text-light">
                   {p.title} x {p.count}
                 </p>

@@ -12,7 +12,7 @@ const SubHome = ({ match }) => {
   useEffect(() => {
     setLoading(true);
     getSub(slug).then((res) => {
-    //   console.log(JSON.stringify(res.data, null, 4));
+      // console.log(JSON.stringify(res.data, null, 4));
       setSub(res.data.sub);
       setProducts(res.data.products);
       setLoading(false);

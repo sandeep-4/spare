@@ -4,30 +4,32 @@ import { getWishlist, removeWishlist } from "../../functions/user";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
-import {toast} from 'react-toastify';
 
 
-const Wishlist=()=>{
+const Wishlist = () => {
 
   const [wishlist,setWishlist]=useState([]);
   const {user}=useSelector((state)=>({...state}));
 
-  useEffect(()=>{
-    loadAllWishlist();
-  },[]);
+  useEffect(() => {
+   loadWishlist(); 
+  }, [])
 
-  const loadAllWishlist=()=>{
+  const loadWishlist=()=>{
     getWishlist(user.token).then((res)=>{
+      console.log(res.data.wishlist);
+      console.log(res.data);
       setWishlist(res.data.wishlist);
-    }).then((err)=>console.log(err));
-  }
-  
-  const handleRemove=(productId)=>{
-    removeWishlist(productId).then((res)=>{
-      toast.error('Removed from wishlist');
-      loadAllWishlist();
     })
   }
+
+  const handleRemove=(productId)=>{
+    removeWishlist(productId,user.token).then((res)=>{
+      loadWishlist();
+    })
+  }
+
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -51,7 +53,7 @@ const Wishlist=()=>{
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Wishlist;

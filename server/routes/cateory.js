@@ -1,14 +1,9 @@
 const express=require('express');
+const { create, read, list, update, remove ,getSubs} = require('../controllers/category');
+const { authCheck, adminCheck } = require('../middlewares/auth');
 
 const router=express.Router();
 
-//imports
-const {create,read,list,update,remove,getSubs} =require('../controllers/category');
-
-//middleawares
-const {authCheck,adminCheck} =require('../middlewares/auth');
-
-//routes
 router.post("/category",authCheck,adminCheck,create);
 router.get("/categories",list);
 router.get("/category/:slug",read);
@@ -20,5 +15,3 @@ router.get("/category/subs/:_id",getSubs);
 
 
 module.exports=router;
-
-

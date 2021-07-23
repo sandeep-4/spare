@@ -1,77 +1,60 @@
-const { default: slugify } = require('slugify');
-const { findOneAndUpdate } = require('../models/category');
 const Category=require('../models/category');
+const Product=require('../models/product');
 const Sub=require('../models/sub');
-const Product =require('../models/product');
-
-// create,read,list,update,remove
+const slugify=require('slugify');
 
 exports.create=async(req,res)=>{
     try {
         const {name}=req.body;
         const category=await new Category({name,slug:slugify(name)}).save();
-        res.status(200).json({
-            category
-        })
+        res.json(category);
     } catch (error) {
-        res.status(403).json({
-            message:error.message
-        })
+        res.status(403).send('Create categorey denied');
     }
 }
+exports.list=async(req,res)=>{
+    const categories=await Category.find({}).sort({createdAt:-1}).exec();
+    res.json(categories);
+}
+
 
 exports.read=async(req,res)=>{
-    
     let category=await Category.findOne({slug:req.params.slug}).exec();
-
-    const products=await Product.find({category}).populate('category').exec();
-
-    res.status(200).json({
+    // res.json(category);
+   const products= await Product.find({category})
+    .populate('category')
+    .exec();
+    
+    res.json({
         category,
-        products
-    })
+        products 
+    });
 }
-
-exports.list=async(req,res)=>{
-    const categories=await Category.find({}).sort({createAt: -1}).exec();
-    res.status(200).json(categories);
-}
-
 exports.update=async(req,res)=>{
     const {name}=req.body;
     try {
-        const updated=await Category.findOneAndUpdate(
-            {slug:req.params.slug}, 
-            {name,slug:slugify(name)},
-           { new:true});
-           res.status(200).json({
-               updated
-           })
+        const updated=await Category.findOneAndUpdate({slug:req.params.slug},
+            {name,slug:slugify(name)}
+            ,{new:true});
+            res.json(updated);
     } catch (error) {
-        res.status(403).json({
-            message:error.message
-        })  
+        res.status(403).send('unable to update'); 
     }
 }
-
 exports.remove=async(req,res)=>{
     try {
         const deleted=await Category.findOneAndDelete({slug:req.params.slug});
-        res.json(deleted);
+        res.json(deleted)
+
     } catch (error) {
-        res.status(403).json({
-            message:error.message
-        })
+        res.status(403).send('unable to delete');
     }
 }
 
 exports.getSubs=async(req,res)=>{
-    try {
-        const subs=await Sub.find({parent:req.params._id});
+    await Sub.find({parent:req.params._id}).exec((err,subs)=>{
+        if(err) console.log(err);
         res.json(subs);
-    } catch (error) {
-        res.status(403).json({
-            message:error.message
-        })
-    }
+    })
 }
+

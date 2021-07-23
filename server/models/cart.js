@@ -7,7 +7,8 @@ const cartSchema=new mongoose.Schema({
             product:{
                 type:ObjectId,
                 ref:'Product'
-            },count:Number,
+            },
+            count:Number,
             color:String,
             price:Number,
         }
@@ -18,6 +19,6 @@ const cartSchema=new mongoose.Schema({
         type:ObjectId,
         ref:'User'
     }
-},{timestamps:true})
+},{timestamps:true});
 
 module.exports=mongoose.model("Cart",cartSchema);

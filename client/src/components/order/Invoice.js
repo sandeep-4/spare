@@ -12,11 +12,11 @@ const Invoice = ({ order }) => (
   <Document>
     <Page style={styles.body}>
       <Text style={styles.header} fixed>
-        ~ {new Date().toLocaleString()} ~
+        ~ {new Date().toLocaleString()}
       </Text>
-      <Text style={styles.title}>Order Invoice</Text>
-      <Text style={styles.author}>Nile</Text>
-      <Text style={styles.subtitle}>Order Description</Text>
+      <Text style={styles.title}>Spare parts Order Invoice</Text>
+      <Text style={styles.author}>Spare Part Ecommerce</Text>
+      <Text style={styles.subtitle}>You8r order details</Text>
 
       <Table>
         <TableHeader>
@@ -31,7 +31,7 @@ const Invoice = ({ order }) => (
       <Table data={order.products}>
         <TableBody>
           <DataTableCell getContent={(x) => x.product.title} />
-          <DataTableCell getContent={(x) => `$ Rs {x.product.price}`} />
+          <DataTableCell getContent={(x) => `Rs ${x.product.price}`} />
           <DataTableCell getContent={(x) => x.count} />
           <DataTableCell getContent={(x) => x.product.brand} />
           <DataTableCell getContent={(x) => x.product.color} />
@@ -60,7 +60,7 @@ const Invoice = ({ order }) => (
         </Text>
       </Text>
 
-      <Text style={styles.footer}> ~ Thank you! Keep visting us  -Nile ~ </Text>
+      <Text style={styles.footer}> Thank you for shopping with us </Text>
     </Page>
   </Document>
 );

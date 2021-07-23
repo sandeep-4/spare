@@ -1,36 +1,30 @@
 const Coupon=require('../models/coupon');
 
+
 exports.create=async(req,res)=>{
-   
-
-try {
-    // const {name,expiry,discount}=req.body
-    const {name,expiry,discount}=req.body.coupon
-    const coupon=await Coupon.create({name,expiry,discount});
-    res.json(coupon);
-    
-} catch (error) {
-    console.log(error.message);   
-}
-}
-
-exports.list=async(req,res)=>{
     try {
-        const coupons=await Coupon.find({})
-        .sort({createdAt:-1})
-        .exec();
-        res.json(coupons);
+        const {name,expiry,discount}=req.body.coupon;
+     
+        const newCoupon=await new Coupon({name,expiry,discount}).save();
+        res.json(newCoupon);
+        // res.json(await new Coupon({name,expiry,discount}).save());
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
-
 }
 
 exports.remove=async(req,res)=>{
     try {
-        const coupon=await Coupon.findByIdAndRemove(req.params.couponId).exec();
-        res.json(coupon);
+        res.json(await Coupon.findByIdAndDelete(req.params.couponId).exec());
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
+    }
+}
+
+exports.list=async(req,res)=>{
+    try {
+        res.json(await Coupon.find({}).sort({createdAt:-1}).exec());
+    } catch (error) {
+        console.log(error);
     }
 }

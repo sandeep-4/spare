@@ -10,15 +10,20 @@ const userSchema=new mongoose.Schema({
     },
     role:{
         type:String,
-        default:'suscriber'
+        default:"subscriber",
     },
     cart:{
         type:Array,
         default:[]
     },
     address:String,
-    wishlist:[{type:ObjectId,ref:'Product'}]
-},
-{timestamps:true})
+    wishlist:[{
+        type:ObjectId,
+        ref:'Product'
+    }],
+
+},{
+    timestamps:true
+});
 
 module.exports=mongoose.model('User',userSchema);

@@ -1,16 +1,15 @@
-const express = require("express");
+const express=require('express');
+const router=express.Router();
 
-const router = express.Router();
 
-//imports
-const { create, remove, list } = require("../controllers/coupon");
+const { authCheck, adminCheck } = require('../middlewares/auth');
 
-//middleawares
-const { authCheck, adminCheck } = require("../middlewares/auth");
+const { remove, list, create } = require('../controllers/coupon');
 
-//routes
-router.post("/coupon", authCheck, adminCheck, create);
-router.get("/coupons", list);
-router.delete("/coupon/:couponId", authCheck, adminCheck, remove);
 
-module.exports = router;
+router.post('/coupon',authCheck,adminCheck,create);
+router.get('/coupons',list);
+router.delete('/coupon/:couponId',authCheck,adminCheck,remove);
+
+
+module.exports=router;

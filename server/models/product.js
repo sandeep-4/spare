@@ -1,68 +1,75 @@
-const mongoose=require('mongoose');
-const {ObjectId} =mongoose.Schema;
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
-const productSchema=new mongoose.Schema({
-    title:{
-        type:String,
-        trim:true,
-        required:true,
-        maxlength:64,
-        text:true
+const productSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      trim: true,
+      required: true,
+      maxlength: 32,
+      text: true,
     },
-    slug:{
-        type:String,
-        index:true,
-        lowercase:64,
-        unique:true
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      index: true,
     },
-    description:{
-        type:String,
-        required:true,
-        maxlength:2000,
-        text:true
+    description: {
+      type: String,
+      required: true,
+      maxlength: 2000,
+      text: true,
     },
-    price:{
-        type:Number,
-        required:true,
-        maxlength:32,
-        text:true
+    price: {
+      type: Number,
+      trim: true,
+      required: true,
+      maxlength: 32,
+      text: true,
     },
-    category:{
-        type:ObjectId,
-        ref:'Category'
+    category: {
+      type: ObjectId,
+      ref: "Category",
     },
-    subs:[
-        {
-        type:ObjectId,
-        ref:'Sub'
+    subs: [
+      {
+        type: ObjectId,
+        ref: "Sub",
+      },
+    ],
+    quantity: Number,
+    sold: {
+      type: Number,
+      default: 0,
     },
-],
-    quantity:Number,
-    sold:{
-        type:Number,
-        default:0
+    images: {
+      type: Array,
     },
-    images:{
-        type:Array
+    shipping: {
+      type: String,
+      enum: ["Yes", "No"],
     },
-    shipping:{
-        type:String,
-        enum:["Yes","No"]
+    color: {
+      type: String,
+      enum: ["Black", "White", "Green", "Red", "Yellow", "Default"],
     },
-    color:{
-        type:String,
-        enum:["Black","Brown","Red","Green"]
+    brand: {
+      type: String,
+      enum: ["Suzaki", "Honda", "Yamaha", "TVS", "Others"],
     },
-    brand:{
-        type:String,
-        enum:["Microsoft","HP","Lenevo","Samsung"]
-    },
-    ratings:[
-        {
-            star:Number,
-            postedBy:{type:ObjectId,ref:'User'}
-        }
-    ]
-},{timestamps:true})
+    ratings: [
+      {
+        star: Number,
+        postedBy: {
+          type: ObjectId,
+          ref: "User",
+        },
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-module.exports=mongoose.model('Product',productSchema);
+module.exports = mongoose.model("Product", productSchema);
